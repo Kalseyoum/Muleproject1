@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="963b7675-0339-4f25-b88b-b520e45ee042" numberOfConsumers="4" destination="Q.FSD.EMP" inboundContentType="" inboundEncoding="" transactionType="LOCAL" primaryNodeOnly="true" transactionalAction="NONE" config-ref="JMS_Config1" ackMode="" selector="">
+		<jms:active-mq-connection username="admin" password="admin" >
+			<jms:factory-configuration brokerUrl="tcp://localhost:61616" />
+		</jms:active-mq-connection>
+		
+
+
+	</jms:config>
+	<flow name="jms-apiFlow" doc:id="fdf25da4-8e29-4fe6-9d16-fbcec85bb379" >
+		<jms:listener doc:name="On New Message" doc:id="963b7675-0339-4f25-b88b-b520e45ee042" config-ref="JMS_Config" destination="Q.FSD.EMP"/>
+		<logger level="INFO" doc:name="Logger" doc:id="bb3ac2d3-e2d9-46c5-bde2-739d9e9a8746" message="#[payload]"/>
+	</flow>
+</mule>
